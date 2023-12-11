@@ -20,14 +20,32 @@ var LoginController = /** @class */ (function () {
     LoginController.isLogin = function (req) {
         return !!(req.session ? req.session.lpLogin : undefined);
     };
-    LoginController.prototype.home = function (req, res) {
-        if (req.session && req.session.lpLogin) {
-            res.send("\n                    <html>\n                    <a href=\"/getData\">\u83B7\u53D6\u6570\u636E</a>\n                    <a href=\"/showData\">\u5C55\u793A\u6570\u636E</a>\n                    <a href=\"/logout\">\u9000\u51FA</a>\n                </html>\n            ");
-        }
-        else {
-            res.send("\n                <html>    \n                    <body>      \n                        <form method=\"post\" action=\"/login\">\n                         <input type=\"password\" name=\"password\"></input>\n                        <button>\u767B\u5F55</button>\n                        </form>\n                    </body>\n                </html>\n            ");
-        }
+    LoginController.prototype.isLogin = function (req, res) {
+        res.send((0, util_1.getResponseData)(LoginController_1.isLogin(req)));
     };
+    // @get('/')
+    // home(req: RequestWithBody, res: Response) {
+    //     if (req.session && req.session.lpLogin) {
+    //         res.send(`
+    //                 <html>
+    //                 <a href="/api/getData">获取数据</a>
+    //                 <a href="/api/showData">展示数据</a>
+    //                 <a href="/api/logout">退出</a>
+    //             </html>
+    //         `)
+    //     } else {
+    //         res.send(`
+    //             <html>    
+    //                 <body>      
+    //                     <form method="post" action="/api/login">
+    //                      <input type="password" name="password"></input>
+    //                     <button>登录</button>
+    //                     </form>
+    //                 </body>
+    //             </html>
+    //         `);
+    //     }
+    // }
     LoginController.prototype.logout = function (req, res) {
         var isLogin = LoginController_1.isLogin(req);
         if (req.session && isLogin) {
@@ -38,7 +56,7 @@ var LoginController = /** @class */ (function () {
     LoginController.prototype.login = function (req, res) {
         var isLogin = LoginController_1.isLogin(req);
         if (isLogin) {
-            res.send("您已登录");
+            res.send((0, util_1.getResponseData)(true));
             return;
         }
         if (req.body.password === '123') {
@@ -48,16 +66,16 @@ var LoginController = /** @class */ (function () {
             }
         }
         else {
-            res.send((0, util_1.getResponseData)({}, "登录失败"));
+            res.send((0, util_1.getResponseData)(false, "登录失败"));
         }
     };
     var LoginController_1;
     __decorate([
-        (0, decorator_1.get)('/'),
+        (0, decorator_1.get)('/isLogin'),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
         __metadata("design:returntype", void 0)
-    ], LoginController.prototype, "home", null);
+    ], LoginController.prototype, "isLogin", null);
     __decorate([
         (0, decorator_1.get)('/logout'),
         __metadata("design:type", Function),
@@ -71,7 +89,7 @@ var LoginController = /** @class */ (function () {
         __metadata("design:returntype", void 0)
     ], LoginController.prototype, "login", null);
     LoginController = LoginController_1 = __decorate([
-        (0, decorator_1.controller)('/')
+        (0, decorator_1.controller)('/api')
     ], LoginController);
     return LoginController;
 }());

@@ -30,7 +30,7 @@ var DataController = /** @class */ (function () {
         var url = "http://www.dell-lee.com/typescript/demo.html?secret=".concat(secret);
         var analyzer = analyzer_1.default.getInstance();
         var spider = new spider_1.default(url, analyzer);
-        res.send((0, util_1.getResponseData)('获取数据成功'));
+        res.send((0, util_1.getResponseData)(true));
     };
     DataController.prototype.showData = function (req, res) {
         try {
@@ -58,7 +58,7 @@ var DataController = /** @class */ (function () {
         __metadata("design:returntype", void 0)
     ], DataController.prototype, "showData", null);
     DataController = __decorate([
-        (0, decorator_1.controller)('/')
+        (0, decorator_1.controller)('/api')
     ], DataController);
     return DataController;
 }());

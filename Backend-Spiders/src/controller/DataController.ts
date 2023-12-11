@@ -10,7 +10,7 @@ import { RequestWithBody } from './LoginController'
 import checkLogin from '../middleware/checkLogin'
 import testLogin from '../middleware/testLogin';
 
-@controller('/')
+@controller('/api')
 export class DataController {
     @get('/getData')
     @use(checkLogin)
@@ -20,7 +20,7 @@ export class DataController {
         const url = `http://www.dell-lee.com/typescript/demo.html?secret=${secret}`
         const analyzer = Analyzer.getInstance();
         const spider = new Spider(url, analyzer);
-        res.send(getResponseData('获取数据成功'));
+        res.send(getResponseData<responseResult.getData>(true));
     }
     @get('/showData')
     @use(checkLogin)
@@ -28,9 +28,9 @@ export class DataController {
         try {
             const filePath = path.resolve(__dirname, '../../data/courseInfo.json');
             const result = fs.readFileSync(filePath, 'utf-8');
-            res.json(getResponseData(JSON.parse(result)));
+            res.json(getResponseData<responseResult.showData>(JSON.parse(result)));
         } catch (e) {
-            res.send(getResponseData({}, '获取数据成功'))
+            res.send(getResponseData<responseResult.showData>({}, '获取数据成功'))
         }
     }
 

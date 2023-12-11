@@ -1,10 +1,10 @@
 
-interface ResponseType {
+interface ResponseType<T> {
     success: boolean;
     errMsg?: string;
-    data: any;
+    data: T;
 }
-const getResponseData = (data: any, errMsg?: string): ResponseType => {
+const getResponseData = <T>(data: T, errMsg?: string): ResponseType<T> => {
     if (errMsg) {
         return {
             success: false,

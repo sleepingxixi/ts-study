@@ -1,0 +1,11 @@
+.home-container {
+    width: 300px;
+    margin: 100px auto;
+    display: flex;
+    justify-content: space-around;
+}
+
+.view-container {
+    width: 1300px;
+    margin: 0 auto;
+}
